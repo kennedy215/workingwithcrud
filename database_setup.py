@@ -1,6 +1,7 @@
 
 import os
 import sys
+import sqlalchemy
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -26,3 +27,8 @@ class MenuItem(Base):
     course = Column(String(250))
     restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant)
+
+    ## Add the engine and base  to see if it will correct problem
+    engine = create_engine('sqlite:///restaurantmenu.db')
+
+    Base.metadata.create_all(engine)
